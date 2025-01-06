@@ -19,5 +19,7 @@ RUN useradd -s /bin/bash $USER
 ADD /scripts/ /opt/scripts/
 RUN chmod -R 777 /opt/scripts/
 
+RUN apt-get -y update && apt-get -y install curl
+
 #Server Start
 ENTRYPOINT ["/opt/scripts/start.sh"]
