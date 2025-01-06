@@ -1,0 +1,46 @@
+name: Copy Unraid Community Applications template(s) to templates repository
+
+on:
+  release:
+    types: [ created ]
+    secrets:
+      PR_OPEN_GITHUB_TOKEN:
+        description: 'Personal Access Token for opening PRs in another repo'
+        required: true
+  workflow_dispatch: ~
+
+jobs:
+  copy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+
+      - name: Establish variables
+        id: vars
+        run: |
+          echo "version=${{ github.event.inputs.version || github.event.release.tag_name }}" >> "$GITHUB_OUTPUT"
+          echo "today=$(date +'%Y-%m-%d')" >> "$GITHUB_OUTPUT"
+          echo "year=$(date +'%Y')" >> "$GITHUB_OUTPUT"
+
+      - name: Display variables
+        run: |
+          echo "Version: ${{ steps.vars.outputs.version }}"
+          echo "Today: ${{ steps.vars.outputs.today }}"
+          echo "Year: ${{ steps.vars.outputs.year }}"
+
+      - name: Open PR with template changes to unraid_templates
+        uses: nwithan8/action-pull-request-another-repo@v1.1.1
+        env:
+          API_TOKEN_GITHUB: ${{ secrets.PR_OPEN_GITHUB_TOKEN }}
+        with:
+          # Will mirror folder structure (copying "templates" folder to "templates" folder in destination repo)
+          source_folder: 'templates'
+          destination_repo: 'nwithan8/unraid_templates'
+          destination_base_branch: 'main'
+          destination_head_branch: tauticord-${{ steps.vars.outputs.version }}
+          user_email: 'nwithan8@users.noreply.github.com'
+          user_name: 'nwithan8'
+          pull_request_assignees: 'nwithan8'
