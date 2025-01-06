@@ -40,7 +40,7 @@ jobs:
           source_folder: 'templates'
           destination_repo: 'nwithan8/unraid_templates'
           destination_base_branch: 'main'
-          destination_head_branch: tauticord-${{ steps.vars.outputs.version }}
+          destination_head_branch: ntfy_on_start-${{ steps.vars.outputs.version }}
           user_email: 'nwithan8@users.noreply.github.com'
           user_name: 'nwithan8'
           pull_request_assignees: 'nwithan8'
