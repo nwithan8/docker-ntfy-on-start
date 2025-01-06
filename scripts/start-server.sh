@@ -1,10 +1,18 @@
 #!/bin/bash
 # Replace HOST_IP with the IP from the Host - only works when container is ran on host interface!
-if grep -q "HOST_IP" <<< "${GOTIFY_MESSAGE}" ; then
+if grep -q "HOST_IP" <<< "${NTFY_MESSAGE}" ; then
   HOST_IP=$(hostname -I | awk '{print $1}')
-  GOTIFY_MESSAGE=$(sed "s/HOST_IP/${HOST_IP}/" <<< "${GOTIFY_MESSAGE}")
+  NTFY_MESSAGE=$(sed "s/HOST_IP/${HOST_IP}/" <<< "${NTFY_MESSAGE}")
 fi
 
-echo "---Sending Gotify message to server address: '${GOTIFY_URL}' with title: '${GOTIFY_TITLE}' and message: '${GOTIFY_MESSAGE}'---"
-wget -qO- "${GOTIFY_URL}message?token=${GOTIFY_TOKEN}" --post-data "title=${GOTIFY_TITLE}&message=${GOTIFY_MESSAGE}&priority=${GOTIFY_PRIORITY}" &>/dev/null
+echo "---Sending ntfy message to server address: '${NTFY_URL}' at topic: '${NTFY_TOPIC}' with title: '${NTFY_TITLE}' and message: '${NTFY_MESSAGE}'---"
+
+curl \
+  -H "Title: ${NTFY_TITLE}" \
+  -H "Priority: ${NTFY_PRIORITY}" \
+  -H "Authorization: Bearer ${NTFY_ACCESS_TOKEN}" \
+  -H "Tags: tada" \
+  -d "${NTFY_MESSAGE}" \
+  "${NTFY_URL}/${NTFY_TOPIC}"
+
 echo "--- D O N E ---"

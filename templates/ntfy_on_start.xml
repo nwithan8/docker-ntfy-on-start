@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<Container version="2">
+    <Name>Ntfy-On-Start</Name>
+    <Repository>nwithan8/ntfy-on-start:latest</Repository>
+    <Registry>https://hub.docker.com/r/ich777/gotify-on-start</Registry>
+    <Network>host</Network>
+    <MyIP/>
+    <Shell>bash</Shell>
+    <Privileged>false</Privileged>
+    <Support>https://forums.unraid.net/topic/83786-support-ich777-application-dockers/</Support>
+    <Project>https://hub.docker.com/r/ich777/gotify-on-start</Project>
+    <Overview>This is a simple container that sends a message when the container is started (needed this for a headless machine to know when I can connect or better speaking start up the VM's with WOL).</Overview>
+    <Category>Tools:Utilities</Category>
+    <WebUI/>
+    <TemplateURL>False</TemplateURL>
+    <Icon>https://raw.githubusercontent.com/ich777/docker-templates/master/ich777/images/donegear.png</Icon>
+    <ExtraParams/>
+    <PostArgs/>
+    <CPUset/>
+    <DateInstalled/>
+    <DonateText>If you like my work please </DonateText>
+    <DonateLink>https://www.paypal.me/chips777</DonateLink>
+    <Description>This is a simple container that sends a message when the container is started (needed this for a headless machine to know when I can connect or better speaking start up the VM's with WOL).&#xD;
+        &#xD;
+        If using the string 'HOST_IP' in the message text the container will try to replace this string with the Host IP address - this will only work when the container is ran on the host network!</Description>
+    <Networking>
+        <Mode>bridge</Mode>
+        <Publish/>
+    </Networking>
+    <Data/>
+    <Environment>
+        <Variable>
+            <Value/>
+            <Name>GOTIFY_URL</Name>
+            <Mode/>
+        </Variable>
+        <Variable>
+            <Value/>
+            <Name>GOTIFY_TOKEN</Name>
+            <Mode/>
+        </Variable>
+        <Variable>
+            <Value>Startup Complete</Value>
+            <Name>GOTIFY_TITLE</Name>
+            <Mode/>
+        </Variable>
+        <Variable>
+            <Value>Server is now Online!</Value>
+            <Name>GOTIFY_MESSAGE</Name>
+            <Mode/>
+        </Variable>
+        <Variable>
+            <Value>5</Value>
+            <Name>GOTIFY_PRIORITY</Name>
+            <Mode/>
+        </Variable>
+    </Environment>
+    <Labels/>
+    <Config Name="Gotify Server URL" Target="GOTIFY_URL" Default="" Mode="" Description="Your Gotify Server URL goes here (please note that you have to enter the URL in this format: 'https://push.example.net/' without quotes and with a trailing slash '/')." Type="Variable" Display="always" Required="true" Mask="false"/>
+    <Config Name="Gotify App Token" Target="GOTIFY_TOKEN" Default="" Mode="" Description="Gotify App Token goes here." Type="Variable" Display="always" Required="true" Mask="false"/>
+    <Config Name="Gotify Message Title" Target="GOTIFY_TITLE" Default="" Mode="" Description="Customized Gotify Message Title here." Type="Variable" Display="always" Required="true" Mask="false">Startup Complete</Config>
+    <Config Name="Gotify Message" Target="GOTIFY_MESSAGE" Default="" Mode="" Description="Customized Gotify Message here." Type="Variable" Display="always" Required="true" Mask="false">Server is now Online!</Config>
+    <Config Name="Gotify Priority" Target="GOTIFY_PRIORITY" Default="" Mode="" Description="Customize the Gotify Priority ('0': Low Priority ; '5': Normal Priority ; '9': High Priority)" Type="Variable" Display="always" Required="true" Mask="false">5</Config>
+</Container>
+
+
+        <?xml version="1.0"?>
+<Container version="2">
+<Name>Ntfy-On-Start</Name>
+<Repository>nwithan8/ntfy-on-start:latest</Repository>
+<Registry>https://hub.docker.com/r/nwithan8/ntfy-on-start</Registry>
+<Branch>
+    <Tag>latest</Tag>
+    <TagDescription>Latest stable release</TagDescription>
+</Branch>
+<Network>bridge</Network>
+<WebUI>http://[IP]:[PORT:5000]/</WebUI>
+<Privileged>false</Privileged>
+<Support>https://github.com/cirx08/WeddingShare/issues</Support>
+<Project>https://github.com/cirx08/WeddingShare</Project>
+<Overview>
+    A basic photo sharing site, allowing anyone to upload and view shared albums.
+</Overview>
+<Beta>False</Beta>
+<Category>MediaApp:Photos MediaServer:Photos Productivity: Tools: Other: Status:Stable</Category>
+<ExtraSearchTerms>photo album share image gallery pictures wedding event party</ExtraSearchTerms>
+<Icon>https://raw.githubusercontent.com/nwithan8/unraid_templates/master/images/wedding-share-icon.png</Icon>
+<TemplateURL>https://raw.githubusercontent.com/nwithan8/unraid_templates/main/templates/wedding_share.xml</TemplateURL>
+<Screenshot>https://raw.githubusercontent.com/Cirx08/WeddingShare/main/screenshots/Homepage.png</Screenshot>
+<Screenshot>https://raw.githubusercontent.com/Cirx08/WeddingShare/main/screenshots/Gallery.png</Screenshot>
+<Screenshot>https://raw.githubusercontent.com/Cirx08/WeddingShare/main/screenshots/Homepage-Mobile.png</Screenshot>
+<Screenshot>https://raw.githubusercontent.com/Cirx08/WeddingShare/main/screenshots/Gallery-Mobile.png</Screenshot>
+<Maintainer>
+    <WebPage>https://github.com/nwithan8</WebPage>
+</Maintainer>
+<Changes>
+    ### 2024-11-19
+
+    Initial release
+</Changes>
+<Config Name="Web UI Port" Target="5000" Default="5000" Mode="tcp" Description="Container Port: 5000" Type="Port" Display="always-hide" Required="true" Mask="false">5000</Config>
+<Config Name="App Title" Target="TITLE" Default="Wedding Share" Description="Title of the app" Type="Variable" Display="always-hide" Required="true" Mask="false">Wedding Share</Config>
+<Config Name="Logo URL" Target="LOGO" Default="https://raw.githubusercontent.com/nwithan8/unraid_templates/master/images/wedding-share-icon.png" Description="URL of the logo" Type="Variable" Display="always-hide" Required="true" Mask="false">https://raw.githubusercontent.com/nwithan8/unraid_templates/master/images/wedding-share-icon.png</Config>
+<Config Name="Gallery Column Count" Target="GALLERY_COLUMNS" Default="4" Description="Number of columns in the gallery" Type="Variable" Display="always-hide" Required="true" Mask="false">4</Config>
+<Config Name="Allowed File Types" Target="ALLOWED_FILE_TYPES" Default=".jpg,.jpeg,.png" Description="Comma separated list of allowed file types" Type="Variable" Display="always-hide" Required="true" Mask="false">.jpg,.jpeg,.png</Config>
+<Config Name="Max File Size" Target="MAX_FILE_SIZE_MB" Default="10" Description="Maximum file size in MB" Type="Variable" Display="always-hide" Required="true" Mask="false">10</Config>
+<Config Name="Secret Key" Target="SECRET_KEY" Default="" Description="Secret key to combat strangers uploading. Optional, but recommended." Type="Variable" Display="always" Required="false" Mask="true"/>
+<Config Name="Disable Upload" Target="DISABLE_UPLOAD" Default="false|true" Description="Disable the ability to upload files" Type="Variable" Display="always-hide" Required="true" Mask="false"/>
+<Config Name="Disable QR Code" Target="DISABLE_QR_CODE" Default="false|true" Description="Disable the sharable QR code" Type="Variable" Display="always-hide" Required="true" Mask="false"/>
+<Config Name="Hide Secret Key from QR Code" Target="HIDE_KEY_FROM_QR_CODE" Default="false|true" Description="Hide the secret key from the QR code" Type="Variable" Display="always-hide" Required="true" Mask="false"/>
+<Config Name="Disable Home Link" Target="DISABLE_HOME_LINK" Default="false|true" Description="Disable the home link" Type="Variable" Display="always-hide" Required="true" Mask="false"/>
+<Config Name="Uploads path" Target="/app/wwwroot/uploads" Default="/mnt/user/appdata/wedding_share/uploads" Description="Path to uploaded files" Type="Path" Display="always-hide" Required="true" Mask="false">/mnt/user/appdata/wedding_share/uploads</Config>
+</Container>
